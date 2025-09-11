@@ -1,14 +1,13 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS  # Fixed: Enable CORS
+from flask_cors import CORS
 import g4f
 import pytesseract
 from PIL import Image
 import os
 
 app = Flask(__name__)
-CORS(app)  # Allow cross-origin requests
+CORS(app)
 
-# System Info Metadata
 API_INFO = {
     "about": "This is a custom public GPT-5 API created by Shaikh Juned",
     "created_by": "Shaikh Juned",
