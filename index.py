@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Fixed: Enable CORS
 import g4f
 import pytesseract
 from PIL import Image
 import os
 
 app = Flask(__name__)
+CORS(app)  # Allow cross-origin requests
 
 # System Info Metadata
 API_INFO = {
@@ -44,7 +46,7 @@ def file_analyze():
         content = file.read().decode('utf-8')
         analysis = g4f.ChatCompletion.create(
             model="gpt-5",
-            messages=[{"role": "user", "content": f"Analyze the following content:\n{content}"}]
+            messages=[{"role": "user", "content": f"Analyze the following content:\\n{content}"}]
         )
         return jsonify({"analysis": analysis})
     except Exception as e:
@@ -61,7 +63,7 @@ def image_analyze():
         text = pytesseract.image_to_string(img)
         analysis = g4f.ChatCompletion.create(
             model="gpt-5",
-            messages=[{"role": "user", "content": f"Analyze this extracted text:\n{text}"}]
+            messages=[{"role": "user", "content": f"Analyze this extracted text:\\n{text}"}]
         )
         return jsonify({"extracted_text": text, "analysis": analysis})
     except Exception as e:
