@@ -1,6 +1,2 @@
 flask
-flask-cors
-pillow
-pytesseract
-g4f
-typing-extensions
+requests
